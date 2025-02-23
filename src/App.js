@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 import { Button, Card, CardContent, Typography, Container, Box } from "@mui/material";
 import playerDataFile from "./ipl_players.xlsx";
 import default_image from "./cric.jpeg";
-import stadium from "./stadium.jpg";
+import stadium from "./stad.jpg";
 import india from "./india.png";
 
 const CricketPlayerViewer = ({ data }) => {
