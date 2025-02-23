@@ -17,8 +17,7 @@ const CricketPlayerViewer = ({ data }) => {
     setIndex((prev) => (prev < data.length - 1 ? prev + 1 : 0));
   };
 
-  const player = data[index] || {}; // Ensure player is defined
-
+  const player = data[index] || {};
   const playerImage =
     player?.image && (player.image.includes("base64") || player.image.startsWith("http") || player.image.startsWith("www"))
       ? player.image
@@ -27,86 +26,46 @@ const CricketPlayerViewer = ({ data }) => {
   return (
     <Card
       sx={{
-        width: "80%",
-        height: "auto",
-        margin: "auto",
-        
-        p: 3,
+        width: "80vw",
+        padding:"10px",
+        height: "90vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: "20px",
         boxShadow: 5,
         bgcolor: "#FFFFFF",
         backdropFilter: "blur(10px)",
-        display: "flex",
-        alignItems: "center",
-        borderRadius: "20px",
-        flexDirection: "row",
+        overflow: "hidden",
       }}
     >
-      <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
-        <img src={playerImage} alt={player?.["First Name"] || "Player"} style={{ height: "400px", borderRadius: "15px" }} />
+      <Box sx={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <img src={playerImage} alt={player?.["First Name"] || "Player"} style={{ width: "100%", objectFit: "contain", borderRadius: "15px" }} />
       </Box>
-      <CardContent sx={{ flex: 2, textAlign: "left" }}>
-      {player?.["List Sr.No."] && (
+      <CardContent sx={{ flex: 2, textAlign: "left", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+        {player?.["List Sr.No."] && (
           <Typography variant="h4" sx={{ fontWeight: "bold", color: "#000" }}>
-            {player?.["List Sr.No."]} 
+            {player?.["List Sr.No."]}
           </Typography>
         )}
-
         {player?.["First Name"] && (
           <Typography variant="h3" sx={{ fontWeight: "bold", color: "#000" }}>
             {player?.["First Name"]} {player?.Surname}
           </Typography>
         )}
-
         {player?.Country && (
-          <Typography
-            sx={{
-              mb: 1,
-              fontSize: "2rem",
-              fontStyle: "italic",
-              color: "#333",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            {player.Country.toLowerCase() === "india" && (
-              <img src={india} alt="India Flag" style={{ width: "40px", height: "30px", borderRadius: "5px" }} />
-            )}
+          <Typography sx={{ fontSize: "2rem", fontStyle: "italic", color: "#333", display: "flex", alignItems: "center", gap: "10px" }}>
+            {player.Country.toLowerCase() === "india" && <img src={india} alt="India Flag" style={{ width: "40px", height: "30px", borderRadius: "5px" }} />}
             {player?.Country}
           </Typography>
         )}
-
-        {player?.Age && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Age:</strong> {player?.Age}
-          </Typography>
-        )}
-
-        {player?.Specialism && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Specialism:</strong> {player?.Specialism}
-          </Typography>
-        )}
-
-        {player?.["Previous IPLTeam(s)"] && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Previous IPL Teams:</strong> {player?.["Previous IPLTeam(s)"]}
-          </Typography>
-        )}
-
-        
-          <Typography sx={{ fontSize: "1.8rem", color: "#d32f2f", fontWeight: "bold" }}>
-            <strong>Base Price:</strong> ₹{player?.base || 50} Lakh
-          </Typography>
-        
-
+        {player?.Age && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Age:</strong> {player?.Age}</Typography>}
+        {player?.Specialism && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Specialism:</strong> {player?.Specialism}</Typography>}
+        {player?.["Previous IPLTeam(s)"] && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Previous IPL Teams:</strong> {player?.["Previous IPLTeam(s)"]}</Typography>}
+        <Typography sx={{ fontSize: "1.8rem", color: "#d32f2f", fontWeight: "bold" }}><strong>Base Price:</strong> ₹{player?.base || 50} Lakh</Typography>
         <Box display="flex" justifyContent="center" mt={3}>
-          <Button variant="contained" onClick={prevPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#555", color: "#fff" }}>
-            Previous
-          </Button>
-          <Button variant="contained" onClick={nextPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#1976d2", color: "#fff" }}>
-            Next
-          </Button>
+          <Button variant="contained" onClick={prevPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#555", color: "#fff" }}>Previous</Button>
+          <Button variant="contained" onClick={nextPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#1976d2", color: "#fff" }}>Next</Button>
         </Box>
       </CardContent>
     </Card>
@@ -133,41 +92,32 @@ const App = () => {
       maxWidth={false}
       disableGutters
       sx={{
-        textAlign: "center",
-        padding: 3,
-        minHeight: "100vh",
-        backgroundImage: `url(${stadium})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        width: "100vw",
+        height: "100vh",
         display: "flex",
+        padding:"10px",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        backgroundImage: `url(${stadium})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Typography
         variant="h2"
-        gutterBottom
         sx={{
           fontWeight: "bold",
           color: "#FFD700",
           textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
+          textAlign: "center",
         }}
       >
         IPL MOCK AUCTION
       </Typography>
-      
       {players.length > 0 ? <CricketPlayerViewer data={players} /> : <Typography color="#FFF">Loading players data...</Typography>}
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontWeight: "bold",
-          color: "#FFD700",
-          textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)",
-        }}
-      >
-        Conducted By Aadhya Team , SRC , CSE Department
+      <Typography variant="h4" sx={{ fontWeight: "bold", color: "#FFD700", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", textAlign: "center" }}>
+        Conducted By Aadhya Team, SRC, CSE Department
       </Typography>
     </Container>
   );
