@@ -30,7 +30,7 @@ const CricketPlayerViewer = ({ data }) => {
         width: "80%",
         height: "auto",
         margin: "auto",
-        mt: 4,
+        
         p: 3,
         boxShadow: 5,
         bgcolor: "#FFFFFF",
@@ -61,7 +61,7 @@ const CricketPlayerViewer = ({ data }) => {
           <Typography
             sx={{
               mb: 1,
-              fontSize: "1.5rem",
+              fontSize: "2rem",
               fontStyle: "italic",
               color: "#333",
               display: "flex",
@@ -77,25 +77,25 @@ const CricketPlayerViewer = ({ data }) => {
         )}
 
         {player?.Age && (
-          <Typography sx={{ fontSize: "1.4rem", color: "#333" }}>
+          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
             <strong>Age:</strong> {player?.Age}
           </Typography>
         )}
 
         {player?.Specialism && (
-          <Typography sx={{ fontSize: "1.4rem", color: "#333" }}>
+          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
             <strong>Specialism:</strong> {player?.Specialism}
           </Typography>
         )}
 
         {player?.["Previous IPLTeam(s)"] && (
-          <Typography sx={{ fontSize: "1.4rem", color: "#333" }}>
+          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
             <strong>Previous IPL Teams:</strong> {player?.["Previous IPLTeam(s)"]}
           </Typography>
         )}
 
         
-          <Typography sx={{ fontSize: "1.4rem", color: "#d32f2f", fontWeight: "bold" }}>
+          <Typography sx={{ fontSize: "1.8rem", color: "#d32f2f", fontWeight: "bold" }}>
             <strong>Base Price:</strong> ₹{player?.base || 50} Lakh
           </Typography>
         
@@ -156,6 +156,8 @@ const App = () => {
       >
         IPL MOCK AUCTION
       </Typography>
+      
+      {players.length > 0 ? <CricketPlayerViewer data={players} /> : <Typography color="#FFF">Loading players data...</Typography>}
       <Typography
         variant="h4"
         gutterBottom
@@ -167,7 +169,6 @@ const App = () => {
       >
         Conducted By Aadhya Team , SRC , CSE Department
       </Typography>
-      {players.length > 0 ? <CricketPlayerViewer data={players} /> : <Typography color="#FFF">Loading players data...</Typography>}
     </Container>
   );
 };
