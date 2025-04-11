@@ -8,7 +8,6 @@ import india from "./india.png";
 
 const CricketPlayerViewer = ({ data }) => {
   const [index, setIndex] = useState(0);
-  const [bidPrice, setBidPrice] = useState(0);
 
   const prevPlayer = () => {
     setIndex((prev) => (prev > 0 ? prev - 1 : data.length - 1));
@@ -19,38 +18,16 @@ const CricketPlayerViewer = ({ data }) => {
   };
 
   const player = data[index] || {};
-  const basePrice = player?.base || 50;
-
   const playerImage =
     player?.image && (player.image.includes("base64") || player.image.startsWith("http") || player.image.startsWith("www"))
       ? player.image
       : default_image;
 
-  useEffect(() => {
-    setBidPrice(basePrice);
-  }, [index]);
-
-  const incrementBid = () => {
-    let increment = 100;
-    if (bidPrice >= 1000) increment = 500;
-    else if (bidPrice >= 500) increment = 250;
-    else if (bidPrice >= 200) increment = 100;
-    setBidPrice((prev) => prev + increment);
-  };
-
-  const decrementBid = () => {
-    let increment = 100;
-    if (bidPrice >= 1000) increment = 500;
-    else if (bidPrice >= 500) increment = 250;
-    else if (bidPrice >= 200) increment = 100;
-    setBidPrice((prev) => prev - increment);
-  };
-
   return (
     <Card
       sx={{
         width: "80vw",
-        padding: "10px",
+        padding:"10px",
         height: "90vh",
         display: "flex",
         alignItems: "center",
@@ -78,71 +55,17 @@ const CricketPlayerViewer = ({ data }) => {
         )}
         {player?.Country && (
           <Typography sx={{ fontSize: "2rem", fontStyle: "italic", color: "#333", display: "flex", alignItems: "center", gap: "10px" }}>
-            {player.Country.toLowerCase() === "india" && (
-              <img src={india} alt="India Flag" style={{ width: "40px", height: "30px", borderRadius: "5px" }} />
-            )}
+            {player.Country.toLowerCase() === "india" && <img src={india} alt="India Flag" style={{ width: "40px", height: "30px", borderRadius: "5px" }} />}
             {player?.Country}
           </Typography>
         )}
-        {player?.Age && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Age:</strong> {player?.Age}
-          </Typography>
-        )}
-        {player?.Specialism && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Specialism:</strong> {player?.Specialism}
-          </Typography>
-        )}
-        {player?.["Previous IPLTeam(s)"] && (
-          <Typography sx={{ fontSize: "1.8rem", color: "#333" }}>
-            <strong>Previous IPL Teams:</strong> {player?.["Previous IPLTeam(s)"]}
-          </Typography>
-        )}
-        <Typography sx={{ fontSize: "1.8rem", color: "#d32f2f", fontWeight: "bold" }}>
-          <strong>Base Price:</strong> ₹{basePrice} Lakh
-        </Typography>
-        <Typography sx={{ fontSize: "1.8rem", color: "#388e3c", fontWeight: "bold" }}>
-          <strong>Current Bid:</strong> ₹{bidPrice} Lakh
-        </Typography>
-        <Box display="flex" justifyContent="start" >
-        <Button
-          variant="outlined"
-          onClick={incrementBid}
-          sx={{
-            mt: 1,
-            width: "200px",
-            fontSize: "1rem",
-            borderColor: "#388e3c",
-            color: "#388e3c",
-            alignSelf: "start",
-            mr:2
-          }}
-        >
-          Increase Bid
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={decrementBid}
-          sx={{
-            mt: 1,
-            width: "200px",
-            fontSize: "1rem",
-            borderColor: "red",
-            color: "red",
-            alignSelf: "start",
-          }}
-        >
-          Decrease Bid
-        </Button>
-        </Box>
-        <Box display="flex" justifyContent="center" mt={4}>
-          <Button variant="contained" onClick={prevPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#555", color: "#fff" }}>
-            Previous
-          </Button>
-          <Button variant="contained" onClick={nextPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#1976d2", color: "#fff" }}>
-            Next
-          </Button>
+        {player?.Age && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Age:</strong> {player?.Age}</Typography>}
+        {player?.Specialism && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Specialism:</strong> {player?.Specialism}</Typography>}
+        {player?.["Previous IPLTeam(s)"] && <Typography sx={{ fontSize: "1.8rem", color: "#333" }}><strong>Previous IPL Teams:</strong> {player?.["Previous IPLTeam(s)"]}</Typography>}
+        <Typography sx={{ fontSize: "1.8rem", color: "#d32f2f", fontWeight: "bold" }}><strong>Base Price:</strong> ₹{player?.base || 50} Lakh</Typography>
+        <Box display="flex" justifyContent="center" mt={3}>
+          <Button variant="contained" onClick={prevPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#555", color: "#fff" }}>Previous</Button>
+          <Button variant="contained" onClick={nextPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#1976d2", color: "#fff" }}>Next</Button>
         </Box>
       </CardContent>
     </Card>
@@ -196,19 +119,9 @@ const App = () => {
       <Typography variant="h4" sx={{ fontWeight: "bold", color: "#FFD700", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", textAlign: "center" }}>
         Conducted By Aarunya Team, CSE Department
       </Typography>
-      <Typography
-    variant="subtitle1"
-    sx={{
-      color: "#FFF",
-      fontWeight: "medium",
-      fontSize: "1rem",
-      textAlign: "center",
-      mt: 1,
-      textShadow: "1px 1px 5px rgba(0, 0, 0, 0.6)",
-    }}
-  >
-    Made by J.Revanth Kumar
-  </Typography>
+      <Typography variant="h6" sx={{ fontWeight: "bold", color: "white", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", textAlign: "right" }}>
+        Made by J.Revanth Kumar
+      </Typography>
     </Container>
   );
 };
