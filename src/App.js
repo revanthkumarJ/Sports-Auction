@@ -31,11 +31,19 @@ const CricketPlayerViewer = ({ data }) => {
   }, [index]);
 
   const incrementBid = () => {
-    let increment = 5;
-    if (bidPrice >= 200) increment = 10;
-    else if (bidPrice >= 100) increment = 10;
-    else if (bidPrice >= 50) increment = 5;
+    let increment = 100;
+    if (bidPrice >= 1000) increment = 500;
+    else if (bidPrice >= 500) increment = 250;
+    else if (bidPrice >= 200) increment = 100;
     setBidPrice((prev) => prev + increment);
+  };
+
+  const decrementBid = () => {
+    let increment = 100;
+    if (bidPrice >= 1000) increment = 500;
+    else if (bidPrice >= 500) increment = 250;
+    else if (bidPrice >= 200) increment = 100;
+    setBidPrice((prev) => prev - increment);
   };
 
   return (
@@ -97,6 +105,7 @@ const CricketPlayerViewer = ({ data }) => {
         <Typography sx={{ fontSize: "1.8rem", color: "#388e3c", fontWeight: "bold" }}>
           <strong>Current Bid:</strong> ₹{bidPrice} Lakh
         </Typography>
+        <Box display="flex" justifyContent="start" >
         <Button
           variant="outlined"
           onClick={incrementBid}
@@ -107,11 +116,26 @@ const CricketPlayerViewer = ({ data }) => {
             borderColor: "#388e3c",
             color: "#388e3c",
             alignSelf: "start",
+            mr:2
           }}
         >
           Increase Bid
         </Button>
-
+        <Button
+          variant="outlined"
+          onClick={decrementBid}
+          sx={{
+            mt: 1,
+            width: "200px",
+            fontSize: "1rem",
+            borderColor: "red",
+            color: "red",
+            alignSelf: "start",
+          }}
+        >
+          Decrease Bid
+        </Button>
+        </Box>
         <Box display="flex" justifyContent="center" mt={4}>
           <Button variant="contained" onClick={prevPlayer} sx={{ mx: 2, fontSize: "1.2rem", bgcolor: "#555", color: "#fff" }}>
             Previous
@@ -177,7 +201,7 @@ const App = () => {
     sx={{
       color: "#FFF",
       fontWeight: "medium",
-      fontSize: "1.2rem",
+      fontSize: "1rem",
       textAlign: "center",
       mt: 1,
       textShadow: "1px 1px 5px rgba(0, 0, 0, 0.6)",
