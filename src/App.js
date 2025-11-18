@@ -117,10 +117,10 @@ const App = () => {
       </Typography>
       {players.length > 0 ? <CricketPlayerViewer data={players} /> : <Typography color="#FFF">Loading players data...</Typography>}
       <Typography variant="h4" sx={{ fontWeight: "bold", color: "#FFD700", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", textAlign: "center" }}>
-        Conducted By Aarunya Team, CSE Department
+        Conducted By ECE Department
       </Typography>
       <Typography variant="h6" sx={{ fontWeight: "bold", color: "white", textShadow: "2px 2px 10px rgba(0, 0, 0, 0.7)", textAlign: "right" }}>
-        Made by J.Revanth Kumar
+        Made by D.Suresh
       </Typography>
     </Container>
   );
